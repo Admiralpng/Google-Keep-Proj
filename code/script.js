@@ -24,7 +24,7 @@ class App {
     this.$modalForm = document.querySelector("#modal-form")
     this.$modalTitle = document.querySelector("#modal-title")
     this.$modalText = document.querySelector("#modal-text")
-    this.$closeModalBtn = document.querySelector(".close-btn")
+    this.$closeBtn = document.querySelector(".close-btn")
     this.$sidebar = document.querySelector(".sidebar")
     this.$miniSideBar = true;
 
@@ -55,9 +55,10 @@ class App {
     })
     
     // modal
-    this.$closeModalBtn.addEventListener("click", (event) => {
+    this.$closeBtn.addEventListener("click", (event) => {
       event.preventDefault();
       this.closeForm(event);
+      this.closeModal(event)
     })
 
     this.$modalForm.addEventListener("submit", (event) => {
@@ -122,7 +123,7 @@ class App {
   }
   closeModal(){
     const modalFormCLickedOn = this.$modalForm.contains(event.target)
-    const closeBtnClickedOn = this.$closeModalBtn.contains(event.target)
+    const closeBtnClickedOn = this.$closeBtn.contains(event.target)
     if((!modalFormCLickedOn || closeBtnClickedOn) && this.$modal.classList.contains("open-modal")){
       this.editNote(this.$selectedNoteID, {title: this.$modalTitle.value, text: this.$modalText.value})
       this.$modal.classList.remove("open-modal");
@@ -176,7 +177,7 @@ class App {
     $noteFooter.style.visibility = "hidden";
   }
 
-    displayNotes() {
+  displayNotes() {
         this.$notes.innerHTML = this.notes.map((note) => 
         `
         <div class="note" id="${note.id}" onmouseover="app.handleNoteMouseOver(this)" onmouseout="app.handleNoteMouseOut(this)">
@@ -225,9 +226,9 @@ class App {
           </div>
         </div>
         `)
-    }
+  }
   
-    archiveHandler(){
+  archiveHandler(){
       const $selectedNote = event.target.closest(".note");
       
       if($selectedNote && event.target.closest(".archive")){
@@ -237,7 +238,7 @@ class App {
       else {
         return;
       }
-    }
+  }
   deleteNote(id) {
       this.notes = this.notes.filter(note => note.id != id)
       this.renderSN();

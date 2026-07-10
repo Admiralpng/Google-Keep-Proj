@@ -62,7 +62,7 @@ nav {
 }
 .logo-text {
   font-size: 1.2rem;
-  cursor:none
+  cursor:default;
 }
 
 .search-area {
@@ -326,4 +326,8 @@ input:focus {
 
 .open-modal {
   visibility: visible;
+}
+
+#text{
+  visibility: hidden;
 }
