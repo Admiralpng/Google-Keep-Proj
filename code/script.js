@@ -118,7 +118,7 @@ class App {
       this.$modalText.value = $selectedNote.children[2].innerHTML;
     }
     else {
-      return;
+      return; 
     }
   }
   closeModal(){
