@@ -124,7 +124,7 @@ class App {
   closeModal(){
     const modalFormCLickedOn = this.$modalForm.contains(event.target)
     const closeBtnClickedOn = this.$closeBtn.contains(event.target)
-    if((!modalFormCLickedOn || closeBtnClickedOn) && this.$modal.classList.contains("open-modal")){
+    if((!modalFormCLickedOn) && this.$modal.classList.contains("open-modal")){
       this.editNote(this.$selectedNoteID, {title: this.$modalTitle.value, text: this.$modalText.value})
       this.$modal.classList.remove("open-modal");
     }
