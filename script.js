@@ -11,7 +11,7 @@ class App {
     
     JSON.parse(localStorage.getItem([]));
 
-    this.notes = JSON.parse(localStorage.getItem("notes")) || {};
+    this.notes = JSON.parse(localStorage.getItem("notes")) || [];
     this.$selectedNoteID = "";
     
     this.$activeForm = document.querySelector(".active-form")
@@ -25,6 +25,7 @@ class App {
     this.$modalTitle = document.querySelector("#modal-title")
     this.$modalText = document.querySelector("#modal-text")
     this.$closeBtn = document.querySelector(".close-btn")
+    this.$closeModalForm = document.querySelector("#modal-close");
     this.$sidebar = document.querySelector(".sidebar")
     this.$miniSideBar = true;
 
@@ -123,8 +124,8 @@ class App {
   }
   closeModal(){
     const modalFormCLickedOn = this.$modalForm.contains(event.target)
-    const closeBtnClickedOn = this.$closeBtn.contains(event.target)
-    if((!modalFormCLickedOn) && this.$modal.classList.contains("open-modal")){
+    const closeBtnClickedOn = this.$closeModalForm.contains(event.target)
+    if((!modalFormCLickedOn || closeBtnClickedOn) && this.$modal.classList.contains("open-modal")){
       this.editNote(this.$selectedNoteID, {title: this.$modalTitle.value, text: this.$modalText.value})
       this.$modal.classList.remove("open-modal");
     }
@@ -230,6 +231,7 @@ class App {
   
   archiveHandler(){
       const $selectedNote = event.target.closest(".note");
+      const $archiveModal = event.target.closest(".modal")
       
       if($selectedNote && event.target.closest(".archive")){
         this.$selectedNoteID = $selectedNote.id;
